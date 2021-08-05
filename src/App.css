@@ -212,21 +212,21 @@ input[type='text'] {
   margin-bottom: 60px;
 }
 
-.notifyExp form label {
+.notifyExp__form label {
   display: inline-block;
   margin-right: 75px;
 }
 
-.notifyExp form label:first-child {
+.notifyExp__form label:first-child {
   margin-left: 25px;
 }
 
-.notifyExp form label p {
+.notifyExp__form label p {
   font-size: 1.25rem;
   font-weight: lighter;
 }
 
-.notifyExp form select {
+.notifyExp__form select {
   width: 245px;
   height: 55px;
   border: 2px solid #555;
@@ -239,18 +239,18 @@ input[type='text'] {
   text-shadow: 1px 3px 3px black;
 }
 
-.notifyExp form input[type='submit'], .notifyExp form button {
+.notifyExp__form input[type='submit'], .notifyExp__form button {
   position: absolute;
   bottom: 0;
   margin-bottom: 30px;
   margin-left: 25px;
 }
 
-.notifyExp form button {
+.notifyExp__form button {
   margin-left: 325px;
 }
 
-.notifyExp form .date {
+.notifyExp__form .date {
   margin-left: 25px;
   margin-top: 100px;
   font-size: 1.25rem;

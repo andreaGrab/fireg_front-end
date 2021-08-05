@@ -1,19 +1,24 @@
 import React from 'react';
 import Axios from 'axios';
+import {apiUrl} from '../../App';
 
 class Expenses extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {onErr: 'none'};
 	}
-
+	
 	deleteExpense(Id){
-		Axios.delete(`/api/expenses/${Id}`)
+		Axios.delete(`${apiUrl}/expenses/${Id}`,{
+			headers:{
+				'Authorization': `Bearer ${document.cookie.split('token=')[1]}`
+			}
+		})
 		.then((res)=>{
 			console.log(res);
 			window.location.reload();
 		})
-		.catch(err=>this.setState({onErr:'inline'}));
+		.catch(err=>{this.setState({onErr:'inline'}); console.log(err)});
 	}
 
 	render(){

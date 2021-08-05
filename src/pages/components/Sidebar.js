@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Axios from 'axios';
+import {apiUrl} from '../../App';
 
 class Sidebar extends React.Component{
 	constructor(props){
@@ -11,12 +12,16 @@ class Sidebar extends React.Component{
 	}
 
 	abortAction(){
-		Axios.delete('/api/abort')
+		Axios.delete(`${apiUrl}/abort`,{
+			headers:{
+				'Authorization': `Bearer ${document.cookie.split('token=')[1]}`
+			}
+		})
 		.then(res => res)
 		.then(obj => console.log(obj.data))
 		.then(()=>window.location.reload())
 		.catch(err=>{
-			window.location.href = '/notauth';
+			window.location.replace('/notauth');
 			console.log(err);
 		});
 	}

@@ -1,6 +1,33 @@
 import React from 'react';
+import Axios from 'axios';
+import {apiUrl} from '../../App';
 
 class Popup extends React.Component {
+    constructor(props){
+        super(props);
+        this.logIn = this.logIn.bind(this);
+        this.state = {name: '', password: {value:''}};
+    }
+
+    logIn(){
+        Axios.post(`${apiUrl}/login`, {
+            name: this.state.name,
+            password: this.state.password.value
+        },{
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(res=> document.cookie = `token=${res.data.token}; SameSite=None; Secure;`)
+        .then(()=>{window.location.reload()})
+        .catch(err=>{
+            document.cookie = `badReq=${err};`;
+            window.location.replace('/badreq');
+            console.log(err);
+        });
+    }
+    
     render() {
         const popUpStyle = {
             position: 'fixed',
@@ -56,17 +83,17 @@ class Popup extends React.Component {
           <div style={popUpStyle}>
               <div style={popUpInnerStyle}>
               <button style={closeBtnStyle} onClick={this.props.closePopup}><svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 24 24" width="30" height="30" preserveAspectRatio="xMinYMin" className="icon__icon"><path d="M7.314 5.9l3.535-3.536A1 1 0 1 0 9.435.95L5.899 4.485 2.364.95A1 1 0 1 0 .95 2.364l3.535 3.535L.95 9.435a1 1 0 1 0 1.414 1.414l3.535-3.535 3.536 3.535a1 1 0 1 0 1.414-1.414L7.314 5.899z"></path></svg></button>
-                <form style={{marginTop: '20px', margin:'auto', textAlign: 'left', width:'40%'}} action='/api/login' method='post'>
+                <div style={{marginTop: '20px', margin:'auto', textAlign: 'left', width:'40%'}}>
                     <h3 style={{textAlign: 'center'}}>Autorizzazione Admin</h3>
 
                     <label>Name</label>
-                    <input style={{marginBottom: '1rem'}} type='text' name='name' />
+                    <input style={{marginBottom: '1rem'}} type='text' name='name' value={this.state.name} onChange={(e)=>this.setState({name: e.target.value})}/>
                     
                     <label>Password</label><br />
-                    <input style={formStyle} type='password' name='password' />
+                    <input style={formStyle} type='password' name='password' value={this.state.password.value} onChange={(e)=>this.setState({password: {value: e.target.value}})}/>
                     
-                    <input className='btn-default' style={{width:'100%', marginTop: '1.5rem'}} type='submit' value='Invia' />
-                </form>
+                    <input className='btn-default' style={{width:'100%', marginTop: '1.5rem'}} type='submit' value='Invia' onClick={this.logIn} />
+                </div>
                 <p style={{marginTop:'1.5rem'}}>Attenzione, dopo l'invio se le credenziali sono corrette, verrà mostrata nuovamente la pagina del registro in qui sarà possibile eseguire le operazioni protette. 
                     <br/><br/><strong>NB: Una volta ottenuta l'autorizzazione di eseguire le operazioni protette, il programma fornirà una finestra di 30 secondi dopo i quali l'autorizzazione sarà di nuovo negata!</strong>
                 </p>

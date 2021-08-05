@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.1",
     "html2canvas": "^1.0.0-rc.5",
     "http-proxy-middleware": "^0.20.0",
     "jspdf": "^1.5.3",
@@ -11,12 +12,11 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "export HTTPS=true&&SSL_CRT_FILE=cert.pem&&SSL_KEY_FILE=key.pem react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
   "secure": false,
   "eslintConfig": {
     "extends": "react-app"
@@ -34,7 +34,6 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.19.0",
     "react-router-dom": "^5.1.2"
   }
 }

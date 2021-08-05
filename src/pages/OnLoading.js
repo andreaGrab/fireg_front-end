@@ -21,7 +21,8 @@ class OnLoading extends React.Component {
             margin: '15% auto',
             marginBottom: '0',
             backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            color: 'transparent'// for react warnings
         };
         const spinLoad = {
             width: '15%',
@@ -30,7 +31,7 @@ class OnLoading extends React.Component {
         };
 		return (
             <div>
-                <h1 style={styling}></h1>
+                <h1 style={styling}>fireg</h1>
                 <img style={spinLoad} src='./spinLoad.gif' alt='icon spin' />
                 <Switch>
                     {this.redirectTo()}

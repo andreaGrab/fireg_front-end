@@ -4,11 +4,29 @@ import { Link } from 'react-router-dom';
 class BadRequest extends React.Component {
     constructor(props){
         super(props);
-        this.state = {errType:null}
+        this.state = {errType:null};
+        this.getCookie = this.getCookie.bind(this);
     }
 
+    // code from W3C
+    getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) === 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+    // end code
+
     render() {
-        /* JSON.stringify(decodeURIComponent(window.sessionStorage.split('badReq=')))*/
         let errorStyle = {
             backgroundColor: '#f00',
             color:'white',
@@ -43,7 +61,7 @@ class BadRequest extends React.Component {
               <h1>Errore: 400 (Bad Request)</h1>
               <h3 style={{marginBottom: '5rem'}}>Contattare il servizio tecnico o il fornitore del software.</h3>
               <Link to='/' style={btnErrStyle}>ESCI</Link>
-              <pre style={errorLogStyle}><p>Error Log: {decodeURIComponent(document.cookie.split('badReq='))}</p></pre>
+              <pre style={errorLogStyle}><p>Error Log: {this.getCookie('badReq')}</p></pre>
           </div>
       );
     }

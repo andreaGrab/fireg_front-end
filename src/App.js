@@ -15,6 +15,8 @@ import {
 	Redirect
 } from 'react-router-dom';
 
+export const apiUrl = 'https://fireg.herokuapp.com/api';
+
 class App extends React.Component {
 	constructor(props){
 		super(props);
@@ -59,12 +61,12 @@ class App extends React.Component {
 
 	componentDidMount(){
 		// get all expenses
-		fetch('/api/expenses/report')
+		fetch(apiUrl + '/expenses/report')
 		.then(res => res.json())
 		.then(exps => {exps.reverse(); this.setState({exps})});
 
 		// calculate report
-		fetch('/api/main-data')
+		fetch(apiUrl + '/main-data')
 		.then(res => res.json())
 		.then(mData => {
 			this.setState({mainData: mData});

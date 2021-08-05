@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class ErrCredentials extends React.Component {
-
     render() {
         let errorStyle = {
             backgroundColor: '#f00',

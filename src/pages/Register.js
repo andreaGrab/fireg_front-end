@@ -8,7 +8,8 @@ class Register extends React.Component {
 		let logo = {
 			backgroundImage: 'url(./logoSide.png)',
 			backgroundSize: 'contain',
-			backgroundRepeat: 'no-repeat'
+			backgroundRepeat: 'no-repeat',
+			color: 'transparent'// for react warnings
 		};
 		return (
 		<div className='regView'>
@@ -21,7 +22,7 @@ class Register extends React.Component {
 							<li><h1>ANNO<br /><span>{this.props.year}</span></h1></li>
 						</ul>
 					</div>
-					<h1 style={logo} className='regView__header__wrapper__title'></h1>
+					<h1 style={logo} className='regView__header__wrapper__title'>FIREG</h1>
 				</div>
 			</div>
 			<div className='regView__content'>
